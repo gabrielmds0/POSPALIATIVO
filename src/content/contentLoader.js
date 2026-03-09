@@ -50,7 +50,7 @@ export const content = {
   hero: {
     headline: 'Domine as decisões mais delicadas da medicina: dor e fim de vida.',
     subtitle:
-      'Participe do Lançamento Oficial da Pós-Graduação em Cuidados Paliativos e Medicina da Dor - a única com dupla formação e 60 horas práticas presenciais.',
+      'Participe do Lançamento Oficial da Pós-Graduação em Cuidados Paliativos e Manejo da Dor - a única com dupla formação e 60 horas práticas presenciais.',
     description:
       'Uma aula única, ao vivo, onde você vai conhecer por dentro a formação com a maior carga horária prática do mercado e entender como garantir sua vaga com condição especial de lançamento',
     badges: [
