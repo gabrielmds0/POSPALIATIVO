@@ -160,7 +160,7 @@ export const content = {
     sectionLabel: 'A INSTITUIÇÃO',
     name: 'A Liberdade Médica',
     description:
-      'Instituição dedicada à formação de médicos que atuam em cenários de alta complexidade. Programas de pós-graduação com ensino teórico estruturado, prática supervisionada presencial e simulação realística.',
+      'Instituição dedicada à formação de médicos que atuam em cenários de alta complexidade. Programas de Pós-Graduação com ensino teórico estruturado, prática supervisionada presencial  e simulação realística.',
     detail:
       'Como braço educacional do maior hospital privado de Goiás, a instituição une rigor acadêmico e vivência hospitalar, promovendo o desenvolvimento do raciocínio clínico, da segurança em procedimentos e da tomada de decisão em contextos críticos. Mais do que conteúdo, a Liberdade Médica oferece formação aplicada à realidade.',
     image: {
