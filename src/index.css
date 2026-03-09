@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2e52eb;
+    outline-offset: 3px;
+  }
+
+  /* Sem animações para quem prefere */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism sem backdrop-filter (muito caro) — usa bg levemente opaco */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hover: apenas borda e sombra, transição curta */
+  .hover-glow {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hover-glow:hover {
+    border-color: rgba(46, 82, 235, 0.35);
+    box-shadow: 0 0 20px rgba(46, 82, 235, 0.12);
+  }
+}

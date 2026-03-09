@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import PyPDF2; print\\(''PyPDF2 available''\\)\")",
+      "Bash(python -c \"import pdfplumber; print\\(''pdfplumber available''\\)\")",
+      "Bash(python -c \"import fitz; print\\(''PyMuPDF available''\\)\")",
+      "Bash(pip install pdfplumber)",
+      "Bash(python -c \":*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ls \"C:/Users/Melo/Documents/Páginas/POSPALIATIVO/node_modules/.bin/vite\"*)",
+      "Bash(grep:*)"
+    ]
+  }
+}

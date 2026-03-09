@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Oficial de Lancamento Pos em Cuidados Paliativos e Medicina da Dor</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Participe da Live Oficial de Lancamento da Pos-Graduacao em Cuidados Paliativos e Medicina da Dor com dupla certificacao e 60 horas praticas presenciais."
+    />
+    <meta name="robots" content="index, follow" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z32W7ZDESC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-Z32W7ZDESC')
+    </script>
+    <script type="text/javascript">
+      ;(function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            ;(c[a].q = c[a].q || []).push(arguments)
+          }
+        t = l.createElement(r)
+        t.async = 1
+        t.src = 'https://www.clarity.ms/tag/' + i
+        y = l.getElementsByTagName(r)[0]
+        y.parentNode.insertBefore(t, y)
+      })(window, document, 'clarity', 'script', 'rjlmen2mzl')
+    </script>
+    <script
+      src="https://trackings.nemu.com.br/trackings/OxVyKz8wj1/script.js"
+      async
+      data-tracking-id="OxVyKz8wj1"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://t.contentsquare.net/uxa/89e8860f4d474.js"></script>
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return
+        n = f.fbq =
+          function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          }
+        if (!f._fbq) f._fbq = n
+        n.push = n
+        n.loaded = !0
+        n.version = '2.0'
+        n.queue = []
+        t = b.createElement(e)
+        t.async = !0
+        t.src = v
+        s = b.getElementsByTagName(e)[0]
+        s.parentNode.insertBefore(t, s)
+      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js')
+      fbq('init', '1064327147462690')
+      fbq('track', 'PageView')
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      function getCookie(name) {
+        const value = `; ${document.cookie}`
+        const parts = value.split(`; ${name}=`)
+        if (parts.length === 2) return parts.pop().split(';').shift()
+        return null
+      }
+
+      fetch('https://api64.ipify.org?format=json')
+        .then((response) => response.json())
+        .then((data) => {
+          const urlParams = new URLSearchParams(window.location.search)
+          const payload = {
+            fbp: getCookie('_fbp') || null,
+            fbc: getCookie('_fbc') || null,
+            ua: navigator.userAgent,
+            url: window.location.href,
+            ip: data.ip,
+            timestamp: Math.floor(Date.now() / 1000),
+            utm_source: urlParams.get('utm_source'),
+            utm_medium: urlParams.get('utm_medium'),
+            utm_campaign: urlParams.get('utm_campaign'),
+            utm_content: urlParams.get('utm_content'),
+            utm_term: urlParams.get('utm_term'),
+          }
+
+          fetch('https://projetolm-n8n.8x0hqh.easypanel.host/webhook/pageview', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          }).catch((error) => console.error('Error tracking pageview:', error))
+        })
+        .catch((error) => console.error('Error getting IP:', error))
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
