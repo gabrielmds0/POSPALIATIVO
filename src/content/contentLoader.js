@@ -102,7 +102,7 @@ export const content = {
       {
         id: 'topic-2',
         number: '02',
-        title: 'Como funciona por dentro a Pós em Cuidados Paliativos e Medicina da Dor',
+        title: 'Como funciona por dentro a Pós em Cuidados Paliativos e Manejo da Dor',
         items: [
           'Matriz curricular completa',
           'Estrutura das 300 horas teóricas',
