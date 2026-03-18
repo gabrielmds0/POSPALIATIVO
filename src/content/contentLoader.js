@@ -211,8 +211,11 @@ export const content = {
         label: 'Telefone Celular',
         type: 'tel',
         required: true,
-        placeholder: '(00) 00000-0000',
+        placeholder: '(11) 91234-5678',
         autocomplete: 'tel',
+        helperText: 'Digite somente DDD + celular com 9 dígitos. O +55 será adicionado automaticamente.',
+        localDigits: 11,
+        maxLength: 15,
       },
       {
         name: 'crm',

@@ -27,6 +27,8 @@ const CLICK_ID_KEYS = [
 const TRACKING_KEYS = [...UTM_KEYS, ...CLICK_ID_KEYS]
 
 const FIRST_TOUCH_STORAGE_KEY = 'lm-pospaliativo-first-touch'
+const HARD_CODED_PHONE_COUNTRY_CODE = '+55'
+const HARD_CODED_PHONE_COUNTRY_LABEL = 'Brasil'
 
 function getUrlParams() {
   const params = new URLSearchParams(window.location.search)
@@ -96,6 +98,23 @@ function getThankYouUrl() {
   return `${prefix}/obrigado${search}`
 }
 
+function getPhoneDigits(value) {
+  return String(value || '').replace(/\D/g, '')
+}
+
+function normalizeBrazilPhoneDigits(raw, maxDigits = 11) {
+  const allDigits = getPhoneDigits(raw)
+  const digits = allDigits.length > maxDigits && allDigits.startsWith('55') ? allDigits.slice(2) : allDigits
+  return digits.slice(0, maxDigits)
+}
+
+function formatPhone(raw, maxDigits = 11) {
+  const digits = normalizeBrazilPhoneDigits(raw, maxDigits)
+  if (digits.length <= 2) return digits.length ? `(${digits}` : ''
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
+}
+
 /**
  * RegisterModal â€” modal de inscriÃ§Ã£o na live.
  * - Focus trap real para acessibilidade (WCAG 2.1 critÃ©rio 2.1.2)
@@ -105,6 +124,7 @@ function getThankYouUrl() {
  */
 export function RegisterModal({ onClose }) {
   const { form } = content
+  const phoneField = form.fields.find((field) => field.name === 'telefone')
   const [values, setValues] = useState({})
   const [touchedFields, setTouchedFields] = useState({})
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false)
@@ -113,6 +133,8 @@ export function RegisterModal({ onClose }) {
   const [submitted, setSubmitted] = useState(false)
   const modalRef = useRef(null)
   const closeRef = useRef(null)
+  const phoneMaxDigits = phoneField?.localDigits || 11
+  const phoneMaxLength = phoneField?.maxLength || 15
 
   // Foca no botÃ£o de fechar ao abrir o modal
   useEffect(() => {
@@ -168,6 +190,7 @@ export function RegisterModal({ onClose }) {
 
   function validate(currentValues = values) {
     const newErrors = {}
+
     form.fields.forEach((field) => {
       const currentValue = currentValues[field.name]
       if (field.required && !hasValue(currentValue)) {
@@ -178,9 +201,9 @@ export function RegisterModal({ onClose }) {
         if (!emailOk) newErrors[field.name] = 'Informe um e-mail válido.'
       }
       if (field.type === 'tel' && currentValue) {
-        const digits = String(currentValue).replace(/\D/g, '')
-        if (digits.length < 10 || digits.length > 11) {
-          newErrors[field.name] = 'Informe um telefone celular válido.'
+        const digits = normalizeBrazilPhoneDigits(currentValue, phoneMaxDigits)
+        if (digits.length !== phoneMaxDigits) {
+          newErrors[field.name] = field.helperText || 'Informe um telefone celular válido.'
         }
       }
     })
@@ -191,16 +214,9 @@ export function RegisterModal({ onClose }) {
   const isFormValid = Object.keys(formErrors).length === 0
   const canSubmit = isFormValid && !isSubmitting
 
-  function formatPhone(raw) {
-    const digits = raw.replace(/\D/g, '').slice(0, 11)
-    if (digits.length <= 2) return digits.length ? `(${digits}` : ''
-    if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
-  }
-
   function handleChange(e) {
     const { name, value } = e.target
-    const newValue = name === 'telefone' ? formatPhone(value) : value
+    const newValue = name === 'telefone' ? formatPhone(value, phoneMaxDigits) : value
     setValues((prev) => ({ ...prev, [name]: newValue }))
     setTouchedFields((prev) => ({ ...prev, [name]: true }))
     if (submitError) setSubmitError('')
@@ -233,6 +249,9 @@ export function RegisterModal({ onClose }) {
       fieldValues[field.name] = typeof fieldValue === 'string' ? fieldValue.trim() : fieldValue
     })
 
+    const phoneDigits = normalizeBrazilPhoneDigits(fieldValues.telefone, phoneMaxDigits)
+    const internationalPhone = phoneDigits ? `${HARD_CODED_PHONE_COUNTRY_CODE}${phoneDigits}` : null
+
     const tracking = getTrackingPayload()
     const captureData = getCaptureData()
 
@@ -243,6 +262,10 @@ export function RegisterModal({ onClose }) {
       formData: {
         ...fieldValues,
         crmLabel,
+        telefone_pais: HARD_CODED_PHONE_COUNTRY_LABEL,
+        telefone_codigo_pais: HARD_CODED_PHONE_COUNTRY_CODE,
+        telefone_somente_digitos: phoneDigits || null,
+        telefone_internacional: internationalPhone,
       },
       utm: tracking.utm,
       clickIds: tracking.clickIds,
@@ -452,6 +475,64 @@ export function RegisterModal({ onClose }) {
                     )
                   }
 
+                  if (field.type === 'tel') {
+                    const helperText = field.helperText
+                    const describedBy = [
+                      helperText ? `hint-${field.name}` : null,
+                      fieldError ? `err-${field.name}` : null,
+                    ]
+                      .filter(Boolean)
+                      .join(' ') || undefined
+
+                    return (
+                      <div key={field.name}>
+                        <label htmlFor={fieldId} className="block text-sm font-medium text-gray-300 mb-1">
+                          {field.label}
+                          {field.required && (
+                            <span className="text-accent ml-1" aria-hidden="true">
+                              *
+                            </span>
+                          )}
+                        </label>
+
+                        <input
+                          id={fieldId}
+                          name={field.name}
+                          type={field.type}
+                          required={field.required}
+                          placeholder={field.placeholder}
+                          autoComplete={field.autocomplete}
+                          inputMode="numeric"
+                          maxLength={phoneMaxLength}
+                          value={values[field.name] || ''}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          aria-invalid={!!fieldError}
+                          aria-describedby={describedBy}
+                          className={[
+                            'w-full rounded-btn px-4 py-3 text-sm',
+                            'bg-white/5 border text-white placeholder-gray-500',
+                            'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                            'transition-colors duration-200',
+                            fieldError ? 'border-red-500/60' : 'border-white/10 hover:border-white/20',
+                          ].join(' ')}
+                        />
+
+                        {helperText && (
+                          <p id={`hint-${field.name}`} className="mt-1 text-xs text-gray-400">
+                            {helperText}
+                          </p>
+                        )}
+
+                        {fieldError && (
+                          <p id={`err-${field.name}`} role="alert" className="mt-1 text-xs text-red-400">
+                            {fieldError}
+                          </p>
+                        )}
+                      </div>
+                    )
+                  }
+
                   return (
                     <div key={field.name}>
                       <label htmlFor={fieldId} className="block text-sm font-medium text-gray-300 mb-1">
@@ -469,6 +550,8 @@ export function RegisterModal({ onClose }) {
                         required={field.required}
                         placeholder={field.placeholder}
                         autoComplete={field.autocomplete}
+                        inputMode={field.type === 'tel' ? 'numeric' : undefined}
+                        maxLength={field.type === 'tel' ? 13 : undefined}
                         value={values[field.name] || ''}
                         onChange={handleChange}
                         onBlur={handleBlur}
