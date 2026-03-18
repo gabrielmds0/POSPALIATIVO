@@ -148,7 +148,7 @@ export const content = {
       'Especialista em Cuidados Paliativos pelo Hospital Israelita Albert Einstein.',
       'Doutorando em Reabilitação com foco em Reabilitação Cardiopneumointensivismo.',
       'Instrutor de ACLS certificado pela American Heart Association.',
-      'Preceptor em Pós-Graduação em Paciente Crítico e Residência Médica.',
+      'Preceptor em Pós-Graduação em Paciente Grave.',
       'Experiência docente em diversas universidades.',
     ],
   },
