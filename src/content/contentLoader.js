@@ -50,7 +50,7 @@ export const content = {
   hero: {
     headline: 'Domine as decisões mais delicadas da medicina: dor e fim de vida.',
     subtitle:
-      'Participe do Lançamento Oficial da Pós-Graduação em Cuidados Paliativos e Manejo da Dor - a única com dupla formação e 60 horas práticas presenciais.',
+      'Participe do Lançamento Oficial da Pós-Graduação em Cuidados Paliativos e Medicina da Dor - a única com dupla formação e 60 horas práticas presenciais.',
     description:
       'Uma aula única, ao vivo, onde você vai conhecer por dentro a formação com a maior carga horária prática do mercado e entender como garantir sua vaga com condição especial de lançamento',
     badges: [
@@ -102,7 +102,7 @@ export const content = {
       {
         id: 'topic-2',
         number: '02',
-        title: 'Como funciona por dentro a Pós em Cuidados Paliativos e Manejo da Dor',
+        title: 'Como funciona por dentro a Pós em Cuidados Paliativos e Medicina da Dor',
         items: [
           'Matriz curricular completa',
           'Estrutura das 300 horas teóricas',
@@ -148,7 +148,7 @@ export const content = {
       'Especialista em Cuidados Paliativos pelo Hospital Israelita Albert Einstein.',
       'Doutorando em Reabilitação com foco em Reabilitação Cardiopneumointensivismo.',
       'Instrutor de ACLS certificado pela American Heart Association.',
-      'Preceptor em Pós-Graduação em Paciente Grave.',
+      'Preceptor em Pós-Graduação em Paciente Crítico e Residência Médica.',
       'Experiência docente em diversas universidades.',
     ],
   },
@@ -160,7 +160,7 @@ export const content = {
     sectionLabel: 'A INSTITUIÇÃO',
     name: 'A Liberdade Médica',
     description:
-      'Instituição dedicada à formação de médicos que atuam em cenários de alta complexidade. Programas de pós-graduação com ensino teórico estruturado, prática supervisionada presencial e simulação realística.',
+      'Instituição dedicada à formação de médicos que atuam em cenários de alta complexidade. Programas de Pós-Graduação com ensino teórico estruturado, prática supervisionada presencial  e simulação realística.',
     detail:
       'Como braço educacional do maior hospital privado de Goiás, a instituição une rigor acadêmico e vivência hospitalar, promovendo o desenvolvimento do raciocínio clínico, da segurança em procedimentos e da tomada de decisão em contextos críticos. Mais do que conteúdo, a Liberdade Médica oferece formação aplicada à realidade.',
     image: {
